@@ -3,10 +3,12 @@ package net.kiwi.tutorialmod.block;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.kiwi.tutorialmod.TutorialMod;
+import net.kiwi.tutorialmod.block.custom.EggplantCroopBlock;
 import net.kiwi.tutorialmod.block.custom.JumpyBlock;
 import net.kiwi.tutorialmod.block.custom.TanzaniteLampBlock;
 import net.kiwi.tutorialmod.item.ModItemGroup;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -33,8 +35,13 @@ public class ModBlocks {
             new TanzaniteLampBlock(FabricBlockSettings.of(Material.METAL).strength(4f).requiresTool()
                     .luminance(state -> state.get(TanzaniteLampBlock.LIT) ? 15 : 0)), ModItemGroup.TANZANITE);
 
+    public static final Block EGGPLANT_CROP = registerBlockWithoutItem("eggplant_crop",
+            new EggplantCroopBlock(FabricBlockSettings.copy(Blocks.WHEAT)));
 
 
+    private static Block registerBlockWithoutItem(String name, Block block) {
+        return Registry.register(Registry.BLOCK, new Identifier(TutorialMod.MOD_ID, name), block);
+    }
 
     private static Block registerBlock(String name, Block block, ItemGroup tab) {
         registerBlockItem(name, block, tab);
